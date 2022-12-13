@@ -32,9 +32,26 @@ struct ContentView: View {
                 })
 
             }.onAppear {
+                myAccel()
                 showAnotherView = false
             }.navigationTitle("Atividade 3")
             
+        }
+    }
+    
+    func myAccel() {
+        motion.accelerometerUpdateInterval = 0.4
+        motion.startAccelerometerUpdates(to: OperationQueue.current!) { (data, error) in
+            
+            if let myData = data {
+                if myData.acceleration.x > 0.5 || myData.acceleration.z > 0.5 || myData.acceleration.y > 0.5 {
+                    showAnotherView = true
+                }
+                
+                x = Double(String(format: "%.5f", myData.acceleration.x))!
+                y = Double(String(format: "%.5f", myData.acceleration.y))!
+                z = Double(String(format: "%.5f", myData.acceleration.z))!
+            }
         }
     }
 }
@@ -45,3 +62,4 @@ struct View2: View {
         Text("Acelerou demais, camarada.\n Cuidado para não derrubar o celular!")
     }
 }
+
