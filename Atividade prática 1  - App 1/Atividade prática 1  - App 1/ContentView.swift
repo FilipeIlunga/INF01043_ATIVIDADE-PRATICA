@@ -35,20 +35,32 @@ struct ContentView: View {
                             Spacer()
                             Button("SUM") {
                                 buttonDidTapped = true
-                               
+                                sumNumbers(num1: number1, num2: number2)
                             }
                             Spacer()
                         }.listRowBackground(Color.gray.opacity(0.5))
                     }
                     
                     Section {
-                        Text("Result: ")
+                        Text("Result: \(getResult())")
                     }
                       
                 }.navigationTitle("Atividade 1")
         }
     }
     
+    func sumNumbers(num1: String, num2: String){
+        
+        guard let n1 = Int(num1), let n2 = Int(num2) else {
+           sum = 0
+           return
+        }
+        sum = n1 + n2
+    }
+    
+    func getResult() -> String {
+        return buttonDidTapped ? "\(sum)": ""
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
