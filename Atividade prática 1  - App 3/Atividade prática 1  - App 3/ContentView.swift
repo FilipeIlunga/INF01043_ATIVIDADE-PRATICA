@@ -8,19 +8,38 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showAnotherView = false
+
+    @State var x: Double = 0.0
+    @State var y: Double = 0.0
+    @State var z: Double = 0.0
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        
+        NavigationView {
+            HStack {
+             
+                Text("X: \(x)")
+                    .shadow(radius: 1, x: x, y: y)
+                Text("Y: \(y)")
+                Text("Z: \(z)")
+                    .shadow(color: Color.green,radius: 2, y: CGFloat(Double()))
+                
+                NavigationLink(destination: View2(), isActive: $showAnotherView, label: {
+                    EmptyView()
+                })
+
+            }.onAppear {
+                showAnotherView = false
+            }.navigationTitle("Atividade 3")
+            
         }
-        .padding()
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+struct View2: View {
+    
+    var body: some View {
+        Text("Acelerou demais, camarada.\n Cuidado para não derrubar o celular!")
     }
 }
