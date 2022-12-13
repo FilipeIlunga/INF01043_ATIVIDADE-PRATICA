@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import CoreMotion
 
 struct ContentView: View {
+    var motion = CMMotionManager()
     @State var showAnotherView = false
 
     @State var x: Double = 0.0
